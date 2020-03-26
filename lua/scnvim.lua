@@ -1,6 +1,7 @@
 local udp = require('scnvim/udp')
 local utils = require('scnvim/utils')
 local help = require('scnvim/help')
+local introspection = require('introspection')
 
 local scnvim = {}
 local eval_callback = nil
@@ -18,7 +19,7 @@ end
 --- Print function signature
 function Methods.method_args(args)
   if not args then return end
-  print(args)
+  introspection.show_signature(args)
 end
 
 --- Open a help file
