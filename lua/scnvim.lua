@@ -1,7 +1,7 @@
 local udp = require('scnvim/udp')
 local utils = require('scnvim/utils')
 local help = require('scnvim/help')
-local introspection = require('introspection')
+local introspection = require('scnvim/introspection')
 
 local scnvim = {}
 local eval_callback = nil
