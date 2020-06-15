@@ -29,14 +29,6 @@ function M.send_to_sc(args)
   M.vimcall('scnvim#sclang#send_silent', {args})
 end
 
-function M.try_close_float()
-  local winid = vim.api.nvim_get_var('scnvim_arghints_float_id')
-  if winid > 0 then
-    vim.api.nvim_win_close(winid, true)
-    vim.api.nvim_set_var('scnvim_arghints_float_id', 0)
-  end
-end
-
 ------------------
 --- String
 ------------------
