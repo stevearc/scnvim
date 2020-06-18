@@ -1,4 +1,5 @@
 local M = {}
+local uv = vim.loop
 
 ------------------
 --- Compat
@@ -27,6 +28,23 @@ end
 --- Send a command to SuperCollider
 function M.send_to_sc(args)
   M.vimcall('scnvim#sclang#send_silent', {args})
+end
+
+--- Read a file from disk
+function M.readFile(path, callback)
+  uv.fs_open(path, "r", 438, function(err, fd)
+    assert(not err, err)
+    uv.fs_fstat(fd, function(err, stat)
+      assert(not err, err)
+      uv.fs_read(fd, stat.size, 0, function(err, data)
+        assert(not err, err)
+        uv.fs_close(fd, function(err)
+          assert(not err, err)
+          return callback(data)
+        end)
+      end)
+    end)
+  end)
 end
 
 ------------------

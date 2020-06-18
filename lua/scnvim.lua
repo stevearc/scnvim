@@ -63,7 +63,9 @@ end
 --- Public interface
 
 function scnvim.init()
+  -- udp setup must come first
   udp.start_server(on_receive)
+  introspection.create()
 end
 
 function scnvim.deinit()
