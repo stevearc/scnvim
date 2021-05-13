@@ -25,16 +25,17 @@ SCNvim {
     *updateStatusLine {arg interval=1;
         var stlFunc = {
             var serverStatus, levelMeter, data;
-            var peakCPU, avgCPU, numUGens, numSynths;
+            var peakCPU, avgCPU, numUGens, numSynths, beat;
             var server = Server.default;
             if (server.serverRunning) {
                 peakCPU = server.peakCPU.trunc(0.01);
                 avgCPU = server.avgCPU.trunc(0.01);
                 numUGens = "%u".format(server.numUGens);
                 numSynths = "%s".format(server.numSynths);
+                beat = "%b".format((TempoClock.default.beats % 32).asInteger);
 
-                serverStatus = "%\\% %\\% % %".format(
-                    peakCPU, avgCPU, numUGens, numSynths
+                serverStatus = "%\\% %\\% % % %".format(
+                    peakCPU, avgCPU, numUGens, numSynths, beat
                 );
                 levelMeter = "-inf dB";
 
